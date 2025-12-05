@@ -1,0 +1,170 @@
+ /* Basic reset for body background */
+  html,body { height:100%; }
+  body {
+    background: #05060a;
+    color: #e6eef8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    overflow-x:hidden;
+  }
+
+  /* Parallax section base */
+  .parallax {
+    position:relative;
+    min-height:100vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    overflow:hidden;
+  }
+
+  /* Multi-layered background container */
+  .parallax .layer {
+    position:absolute;
+    inset:0;
+    background-position:center;
+    background-size:cover;
+    will-change:transform, opacity;
+    pointer-events:none;
+  }
+
+  /* Foreground card wrapper */
+  .card {
+    position:relative;
+    z-index:40;
+    backdrop-filter: blur(6px);
+    background: rgba(2,6,23,0.45);
+    border-radius:1rem;
+    padding:2rem;
+    box-shadow: 0 10px 40px rgba(2,6,23,0.6);
+    transform-origin:center;
+  }
+
+  /* Fog layers */
+  .fog {
+    position:absolute;
+    width:160%;
+    height:160%;
+    left:-30%;
+    top:-30%;
+    background-repeat:no-repeat;
+    background-size:cover;
+    opacity:0.28;
+    filter: blur(22px) saturate(120%);
+    will-change:transform, opacity;
+    pointer-events:none;
+  }
+
+  /* Canvas overlay for particles (fireflies) */
+  #particle-canvas {
+    position:fixed;
+    inset:0;
+    z-index:20;
+    pointer-events:none;
+    mix-blend-mode:screen;
+  }
+
+  /* Gallery tilt specifics */
+  .gallery-card {
+    transform-style:preserve-3d;
+    will-change:transform;
+  }
+
+  /* Cursor magnet (for interactive elements) */
+  .magnet {
+    transition: transform 0.25s cubic-bezier(.2,.9,.3,1);
+  }
+.split-left,
+.split-right,
+.split-center,
+.parallax-split-block {
+    will-change: transform, opacity;
+    transition: all 1s cubic-bezier(0.19,1,0.22,1);
+}
+.step-card, .step-title {
+  will-change: transform, opacity;
+  transition: all 1s cubic-bezier(0.19,1,0.22,1);
+}
+
+.animate-float-slow { animation: float-slow 8s ease-in-out infinite alternate; }
+.animate-float-fast { animation: float-fast 6s ease-in-out infinite alternate; }
+
+@keyframes float-slow { 0%{transform:translateY(0)}50%{transform:translateY(-20px)}100%{transform:translateY(0)} }
+@keyframes float-fast { 0%{transform:translateY(0)}50%{transform:translateY(-12px)}100%{transform:translateY(0)} }
+
+.step-card:hover { transform: rotateY(5deg) rotateX(3deg) scale(1.05); }
+
+/* Each connector line animation */
+.connector-line {
+  stroke-dasharray: 100;
+  stroke-dashoffset: 100;
+  transition: stroke-dashoffset 0.5s ease-out;
+}
+.dynamic-curve {
+  stroke-width: 3;
+  fill: none;
+  stroke-linecap: round;
+  stroke-dasharray: 8 12; /* creates dashed pattern for flow */
+  stroke-dashoffset: 1000; /* will animate to create flow */
+  transition: stroke-dashoffset 0.5s ease-out;
+}
+
+/* Optional: add glow */
+.dynamic-curve {
+  filter: drop-shadow(0 0 6px #0ea5e9);
+}
+
+/* Keep floating icons and step hover effects */
+.step-card:hover { transform: rotateY(5deg) rotateX(3deg) scale(1.05); }
+
+
+  /* Low-motion preference */
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; transition-duration:0.01ms !important; scroll-behavior: auto !important; }
+  }
+
+  /* Mobile adjustments */
+  @media (max-width:768px) {
+    .card { padding:1.25rem; border-radius:.75rem; }
+  }
+.cinematic-bg {
+        background-image: url('https://images.unsplash.com/photo-1502920514313-52581002a659?q=80');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        filter: brightness(0.55);
+    }
+
+    .fade-up {
+        opacity: 0;
+        transform: translateY(40px);
+        transition: all 1.5s ease-out;
+    }
+
+    .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .floating-particles {
+        position: absolute;
+        inset: 0;
+        overflow: hidden;
+        pointer-events: none;
+    }
+
+    .floating-particles span {
+        position: absolute;
+        width: 6px;
+        height: 6px;
+        background: white;
+        border-radius: 50%;
+        opacity: 0.15;
+        animation: floatUp 10s linear infinite;
+    }
+
+    @keyframes floatUp {
+        0% { transform: translateY(100vh) scale(0.3); }
+        100% { transform: translateY(-10vh) scale(1); }
+    }
